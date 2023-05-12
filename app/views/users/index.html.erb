@@ -1,1 +1,26 @@
-<h1>Hello Users!!!</h1>
+<h1>Shop Management Dashboard</h1>
+<br>
+<br>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+    <th>ContactNo</th>
+    <th>Address</th>
+    <th>Gender</th>
+  </tr>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.id%></td>
+    <td><%= user.Firstname %></td>
+    <td><%= user.Lastname %></td>
+    <td><%= user.Email %></td>
+    <td><%= user.Contactno %></td>
+    <td><%= user.Address %></td>
+    <td><%= user.Gender %></td>
+    </a>
+  </tr>
+<% end %>
+</table>
