@@ -1,0 +1,28 @@
+<h1><%= link_to "Add new Product", new_product_path, class: "btn btn-primary" %></h1>
+<h1><%= link_to 'Back to dashboard', root_path %></h1>
+<br>
+<h1 style="color:red">Products List</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>CompanyName</th>
+    <th>MfgDate</th>
+    <th>ExpDate</th>
+    <th>Quality</th>
+    <th>Price</th>
+  </tr>
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.id%></td>
+      <td><%= product.name %></td>
+      <td><%= product.company_name %></td>
+      <td><%= product.mfg_date %></td>
+      <td><%= product.exp_date %></td>
+      <td><%= product.quality %></td>
+      <td><%= product.price%></td>
+      </a>
+    </tr>
+  <% end %>
+  </table>

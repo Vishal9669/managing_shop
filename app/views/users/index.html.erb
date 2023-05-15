@@ -1,6 +1,9 @@
-<h1>Shop Management Dashboard</h1>
+
+<h1><%= link_to "Create new Users", new_user_path, class: "btn btn-primary" %></h1>
+<h1><%= link_to 'Back to dashboard', root_path %></h1>
 <br>
-<br>
+<h1 style="color:red">Users List</h1>
+
 <table>
   <tr>
     <th>Id</th>
@@ -14,12 +17,12 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.id%></td>
-    <td><%= user.Firstname %></td>
-    <td><%= user.Lastname %></td>
-    <td><%= user.Email %></td>
-    <td><%= user.Contactno %></td>
-    <td><%= user.Address %></td>
-    <td><%= user.Gender %></td>
+    <td><%= user.first_name %></td>
+    <td><%= user.last_name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.contact_no %></td>
+    <td><%= user.address %></td>
+    <td><%= user.gender %></td>
     </a>
   </tr>
 <% end %>

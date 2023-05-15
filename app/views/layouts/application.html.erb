@@ -10,6 +10,15 @@
   </head>
 
   <body>
+  <hr>
+
+    <div style ="display:flex;">
+    <div style= "margin-right:25px;"><%= link_to "Home", root_path %></div>
+    <div style= "margin-right:25px;"><%= link_to "Users","/users"%></div>
+    <div style= "margin-right:25px;"><%= link_to "Products","/products"%></div>
+    </div>
+
+  <hr>
     <%= yield %>
   </body>
 </html>
