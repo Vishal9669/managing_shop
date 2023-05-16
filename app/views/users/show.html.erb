@@ -1,0 +1,12 @@
+<h1>User Details</h1>
+<p><strong>FirstName:</strong> <%= @user.first_name%></p>
+<p><strong>LastName:</strong> <%= @user.last_name%></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>ContactNo:</strong> <%= @user.contact_no %></p>
+<p><strong>Address:</strong> <%= @user.address%></p>
+<p><strong>Gender:</strong> <%= @user.gender %></p>
+
+<%= link_to "Edit", edit_user_path(@user.id) %>
+<%= link_to "Destroy", user_path(@user.id),
+    method: :delete,
+    data: {confirm:'Are you sure ?'} %>

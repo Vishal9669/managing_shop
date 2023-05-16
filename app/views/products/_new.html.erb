@@ -1,0 +1,45 @@
+<h1>Add New Product</h1>
+<br>
+
+<%= form_with scope: :product, url: products_path, local: true do |form| %>
+
+<p>
+  <%= form.label :Name %><br>
+  <%= form.text_field :name %>
+</p>
+
+<p>
+  <%= form.label :CompanyName %><br>
+  <%= form.text_field :company_name%>
+</p>
+
+<p>
+  <%= form.label :mfgDate %><br>
+  <%= form.date_field :mfg_date %>
+</p>
+
+<p>
+  <%= form.label :expDate %><br>
+  <%= form.date_field :exp_date %>
+</p>
+
+<p>
+  <%= form.label :Quality%><br>
+  <%= form.text_field :quality %>
+</p>
+
+<p>
+  <%= form.label :Price%><br>
+  <%= form.text_field :price%>
+</p>
+
+<p>
+  <%= form.submit %>
+</p>
+
+<% end %>
+
+<%= link_to 'Back', products_path %>
+<br>
+<br>
+<%= link_to 'Back to dashboard', root_path %>

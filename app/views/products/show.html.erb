@@ -1,0 +1,12 @@
+<h1>Product Details</h1>
+<p><strong>Name:</strong> <%= @product.name%></p>
+<p><strong>CompanyName:</strong> <%= @product.company_name%></p>
+<p><strong>MfgDate:</strong> <%= @product.mfg_date %></p>
+<p><strong>ExpDate:</strong> <%= @product.exp_date %></p>
+<p><strong>Quality:</strong> <%= @product.quality%></p>
+<p><strong>Price:</strong> <%= @product.price %></p>
+
+<%= link_to "Edit", edit_product_path(@product.id) %>
+<%= link_to "Destroy", product_path(@product.id),
+    method: :delete,
+    data: {confirm:'Are you sure ?'} %>

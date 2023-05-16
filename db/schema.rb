@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2023_05_15_113011) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "company_name"
-    t.datetime "mfg_date"
-    t.datetime "exp_date"
+    t.date "mfg_date"
+    t.date "exp_date"
     t.string "quality"
     t.decimal "price"
     t.datetime "created_at", null: false

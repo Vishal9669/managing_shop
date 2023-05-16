@@ -3,8 +3,8 @@ class CreateProducts < ActiveRecord::Migration[5.2]
     create_table :products do |t|
       t.string :name
       t.string :company_name
-      t.datetime :mfg_date
-      t.datetime :exp_date
+      t.date :mfg_date
+      t.date :exp_date
       t.string :quality
       t.decimal :price
 
