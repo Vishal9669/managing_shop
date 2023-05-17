@@ -1,0 +1,30 @@
+<h1><%= link_to "Add new Order", new_order_path, class: "btn btn-primary" %></h1>
+<h1><%= link_to 'Back to dashboard', root_path %></h1>
+<br>
+<h1 style="color:red">Orders List</h1>
+
+
+<table class="table table-bordered">
+  <tr>
+    <th>UserId</th>
+    <th>ProductId</th>
+    <th>Quantity</th>
+    <th>TotalPrice</th>
+    <th>Edit</th>
+    <th>Delete<th>
+  </tr>
+  <% @orders.each do |order| %>
+    <tr>
+
+      <td><%= link_to order.user_id, order %></td>
+      <td><%= order.product_id%></td>
+      <td><%= order.quantity%></td>
+      <td><%= order.total_price %></td>
+      <td><%= link_to "Edit", edit_order_path(order.id) %></td>
+      <td><%= link_to "Destroy", order_path(order.id),
+      method: :delete,
+      data: {confirm:'Are you sure ?'} %></td>
+      </a>
+    </tr>
+  <% end %>
+  </table>

@@ -14,9 +14,9 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to root_path, notice: 'product created successfully.'
+      redirect_to root_path
     else
-      render :new
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -27,16 +27,16 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to @product, notice: 'product was successfully updated.'
+      redirect_to @product
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to products_url, notice: 'product was successfully deleted.'
+    redirect_to products_url
   end
 
 
@@ -46,4 +46,13 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name,:company_name, :mfg_date, :exp_date, :quality, :price)
   end
+
+
+  def order_form
+    @product = Product.find(params[:id])
+    @user = current_user
+    @order = Order.new
+
+  end
+
 end
