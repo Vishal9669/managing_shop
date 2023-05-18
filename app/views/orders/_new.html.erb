@@ -4,13 +4,14 @@
 <%= form_with scope: :order, url: orders_path, local: true do |form| %>
 
 <p>
-  <%= form.label :UserId %><br>
-  <%= form.text_field :order_id%>
+  <%= form.label :UserName %><br>
+  <%= form.collection_select(:user_id, User.all, :id, :first_name, promt: true)%>
+
 </p>
 
 <p>
-  <%= form.label :ProductId %><br>
-  <%= form.text_field :product_id%>
+  <%= form.label :ProductName %><br>
+  <%= form.collection_select(:product_id, Product.all, :id, :name, promt: true)%>
 </p>
 
 <p>
@@ -18,10 +19,6 @@
   <%= form.text_field :quantity %>
 </p>
 
-<p>
-  <%= form.label :TotalPrice %><br>
-  <%= form.text_field :total_price %>
-</p>
 
 <p>
   <%= form.submit %>

@@ -15,11 +15,17 @@
 <p>
   <%= form.label :Email %><br>
   <%= form.email_field :email%>
+  <% @user.errors.full_messages_for(:email).each do |message| %>
+    <div style="color:red"><%= message %></div>
+    <% end %>
 </p>
 
 <p>
   <%= form.label :ContactNo %><br>
-  <%= form.telephone_field :contact_no, min: 0 %>
+  <%= form.telephone_field :contact_no%>
+  <% @user.errors.full_messages_for(:contact_no).each do |message| %>
+    <div style="color:red"><%= message %></div>
+    <% end %>
 </p>
 
 <p>
@@ -29,7 +35,9 @@
 
 <p>
   <%= form.label :Gender%><br>
-  <%= form.text_field :gender %>
+  <%= form.select(:gender, options_for_select([['male', 'Male'], ['female','Female']]), {:prompt => 'Select Gender'})%>
+
+
 </p>
 
 <p>

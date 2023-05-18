@@ -2,7 +2,6 @@
 <p><strong>UserId:</strong> <%= @order.user_id%></p>
 <p><strong>ProductId:</strong> <%= @order.product_id%></p>
 <p><strong>Quantity:</strong> <%= @order.quantity %></p>
-<p><strong>TotalPrice:</strong> <%= @order.total_price%></p>
 
 <%= link_to "Edit", edit_order_path(@order.id) %><br><br>
 <%= link_to "Destroy", order_path(@order.id),

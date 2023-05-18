@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.bigint :contact_no
       t.string :address
       t.string :gender
-      t.references :product, null: false, foreign_key: true
+     
 
       t.timestamps
     end

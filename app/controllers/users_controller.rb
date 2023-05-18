@@ -15,12 +15,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path
+      redirect_to "/users"
     else
       render :new, status: :unprocessable_entity
     end
   end
-
 
   def edit
     @user = User.find(params[:id])

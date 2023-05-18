@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2023_05_17_134937) do
     t.bigint "user_id"
     t.bigint "product_id"
     t.integer "quantity"
-    t.float "total_price"
+    t.integer "grand_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_orders_on_product_id"
@@ -27,12 +27,14 @@ ActiveRecord::Schema.define(version: 2023_05_17_134937) do
   end
 
   create_table "product_orders", force: :cascade do |t|
+    t.bigint "order_id"
     t.bigint "product_id"
-    t.bigint "user_id"
+    t.integer "quantity"
+    t.float "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
     t.index ["product_id"], name: "index_product_orders_on_product_id"
-    t.index ["user_id"], name: "index_product_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -53,13 +55,10 @@ ActiveRecord::Schema.define(version: 2023_05_17_134937) do
     t.bigint "contact_no"
     t.string "address"
     t.string "gender"
-    t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_users_on_product_id"
   end
 
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
-  add_foreign_key "users", "products"
 end

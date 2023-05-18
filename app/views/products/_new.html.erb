@@ -25,7 +25,8 @@
 
 <p>
   <%= form.label :Quality%><br>
-  <%= form.text_field :quality %>
+  <%= form.select(:quality, options_for_select([['Bad', 'Bad'], ['Average','Average'],['Good']]), {:prompt => 'Select Quality'})%>
+
 </p>
 
 <p>

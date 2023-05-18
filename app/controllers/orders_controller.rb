@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      redirect_to root_path
+      redirect_to "/orders"
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:user_id,:product_id, :quantity, :total_price)
+    params.require(:order).permit(:user_id, :product_id, :quantity, :total_price)
   end
 
 end
