@@ -7,19 +7,25 @@
 <table class="table table-bordered">
   <tr>
     <th>UserId</th>
-    <th>ProductId</th>
     <th>Quantity</th>
-    <th>Grand Total</th>
+    <th>Total</th>
     <th>Edit</th>
     <th>Delete<th>
   </tr>
   <% @orders.each do |order| %>
     <tr>
 
-      <td><%= link_to order.user_id, order %></td>
-      <td><%= order.product_id%></td>
-      <td><%= order.quantity%></td>
-      <td><%= order.grand_total%></td>
+      <td>
+        <% if order.user%>
+          <%= link_to order.user.first_name, order %>
+        <% end %>
+      </td>
+      <td><%= order.quantity %></td>
+
+      <% order.product_orders.each do |order| %>
+      <td><%= order.total_price %></td>
+      <% end %>
+
       <td><%= link_to "Edit", edit_order_path(order.id) %></td>
       <td><%= link_to "Destroy", order_path(order.id),
       method: :delete,
@@ -27,4 +33,4 @@
       </a>
     </tr>
   <% end %>
-  </table>
+</table>

@@ -1,16 +1,9 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :products, through: :product_orders
-  has_many :product_orders, dependent: :destroy
+  has_many :product_orders, inverse_of: :order, dependent: :destroy
 
-  before_save :update_grand_total
+  accepts_nested_attributes_for :product_orders
 
-
-
-  def update_grand_total
-    self.grand_total = price * quantity
-    save
-  end
-
+  validates :user_id, :quantity, presence: true
 
 end

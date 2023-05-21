@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @order.product_orders.build
   end
 
   def show
@@ -42,9 +43,8 @@ class OrdersController < ApplicationController
 
 
   private
-
   def order_params
-    params.require(:order).permit(:user_id, :product_id, :quantity, :total_price)
+    params.require(:order).permit(:user_id, :total_price, :quantity, product_orders_attributes: [:product_id])
   end
 
 end
