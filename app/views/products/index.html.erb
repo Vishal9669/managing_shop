@@ -8,11 +8,6 @@
   <tr>
     <th>Id</th>
     <th>Name</th>
-    <th>CompanyName</th>
-    <th>MfgDate</th>
-    <th>ExpDate</th>
-    <th>Quality</th>
-    <th>Price</th>
     <th>Edit</th>
     <th>Delete<th>
   </tr>
@@ -20,11 +15,6 @@
     <tr>
       <td><%= product.id%></td>
       <td><%= link_to product.name, product %></td>
-      <td><%= product.company_name %></td>
-      <td><%= product.mfg_date %></td>
-      <td><%= product.exp_date %></td>
-      <td><%= product.quality %></td>
-      <td><%= product.price%></td>
       <td><%= link_to "Edit", edit_product_path(product.id) %></td>
       <td><%= link_to "Destroy", product_path(product.id),
       method: :delete,
@@ -32,4 +22,5 @@
       </a>
     </tr>
   <% end %>
-  </table>
+</table>
+

@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_134937) do
+ActiveRecord::Schema.define(version: 2023_05_22_070228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "lineItem_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lineItem_id"], name: "index_carts_on_lineItem_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
@@ -36,13 +50,19 @@ ActiveRecord::Schema.define(version: 2023_05_17_134937) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.string "company_name"
-    t.date "mfg_date"
-    t.date "exp_date"
-    t.string "quality"
-    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_products", force: :cascade do |t|
+    t.string "company_name"
+    t.string "description"
+    t.date "mfg_date"
+    t.decimal "price"
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_sub_products_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,4 +79,5 @@ ActiveRecord::Schema.define(version: 2023_05_17_134937) do
   add_foreign_key "orders", "users"
   add_foreign_key "product_orders", "orders"
   add_foreign_key "product_orders", "products"
+  add_foreign_key "sub_products", "products"
 end

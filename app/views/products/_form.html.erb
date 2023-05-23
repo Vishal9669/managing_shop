@@ -3,55 +3,18 @@
 
 <%= form_with model: @product, local: true do |form| %>
 
-<p>
-  <%= form.label :Name %><br>
-  <%= form.text_field :name %>
-  <% @product.errors.full_messages_for(:name).each do |message| %>
-    <div style="color:red"><%= message %></div>
+  <p>
+    <%= form.label :ProductName %><br>
+    <%= form.text_field :name %>
+    <% @product.errors.full_messages_for(:name).each do |message| %>
+      <div style="color:red"><%= message %></div>
     <% end %>
-</p>
+  </p>
 
-<p>
-  <%= form.label :CompanyName %><br>
-  <%= form.text_field :company_name%>
-  <% @product.errors.full_messages_for(:company_name).each do |message| %>
-    <div style="color:red"><%= message %></div>
-    <% end %>
-</p>
 
-<p>
-  <%= form.label :mfgDate %><br>
-  <%= form.date_field :mfg_date %>
-  <% @product.errors.full_messages_for(:mfg_date).each do |message| %>
-    <div style="color:red"><%= message %></div>
-    <% end %>
-</p>
-
-<p>
-  <%= form.label :expDate %><br>
-  <%= form.date_field :exp_date %>
-  <% @product.errors.full_messages_for(:exp_date).each do |message| %>
-    <div style="color:red"><%= message %></div>
-    <% end %>
-</p>
-
-<p>
-  <%= form.label :Quality%><br>
-  <%= form.select(:quality, options_for_select([['Bad', 'Bad'], ['Average','Average'],['Good']]), {:prompt => 'Select Quality'})%>
-
-</p>
-
-<p>
-  <%= form.label :Price%><br>
-  <%= form.text_field :price%>
-  <% @product.errors.full_messages_for(:price).each do |message| %>
-    <div style="color:red"><%= message %></div>
-    <% end %>
-</p>
-
-<p>
-  <%= form.submit %>
-</p>
+  <p>
+    <%= form.submit %>
+  </p>
 
 <% end %>
 
