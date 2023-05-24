@@ -1,13 +1,12 @@
 class SubProductsController < ApplicationController
-  # before_action :set_product
-  before_action :set_sub_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product_id , only: [:create, :show, :edit, :update, :destroy]
+  before_action :set_sub_product_id, only: [:show, :edit, :update, :destroy]
 
   def index
     @subproducts = SubProduct.all
   end
 
   def show
-    @subproduct = SubProduct.find(params[:id])
   end
 
   def new
@@ -15,47 +14,39 @@ class SubProductsController < ApplicationController
   end
 
   def create
-    @subproduct = SubProduct.new(sub_product_params)
-
-    if @subproduct.save
-      redirect_to "/sub_products"
-    else
-      render :new
-    end
+    @subproduct = @product.sub_products.create(sub_product_params)
+    redirect_to product_path(@product)
   end
 
-
   def edit
-    @subproduct = SubProduct.find(params[:id])
+    @subproduct = @product.sub_products.find(params[:id])
   end
 
   def update
-    @subproduct = SubProduct.find(params[:id])
     if @subproduct.update(sub_product_params)
-      redirect_to @subproduct
+      redirect_to product_path(@product)
     else
       render :edit , status: :unprocessable_entity
     end
   end
 
-
   def destroy
-    @subproduct = SubProduct.find(params[:id])
     @subproduct.destroy
-    redirect_to sub_products_url
+    redirect_to product_path(@product)
   end
-
-
 
   private
 
+  def set_product_id
+    @product = Product.find(params[:product_id])
+  end
 
-  # def set_product
-  #   @subproduct = SubProduct.find(params[:product_id])
-  # end
-
-  def set_sub_product
+  def set_sub_product_id
     @subproduct = SubProduct.find(params[:id])
+  end
+
+  def product_params
+    params.require(:product).permit(:id, :name)
   end
 
   def sub_product_params

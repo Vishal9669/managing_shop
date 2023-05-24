@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :users
-  resources :products
   resources :orders
-  resources :sub_products
-  # resources :products do
-  #   resources :sub_products
-  # end
+  # resources :products
+  # resources :sub_products
+  resources :products do
+    resources :sub_products
+  end
 
 
 
