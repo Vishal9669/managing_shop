@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
-  
-  def index
-  end
 
+  def index
+     @products = Product.all
+     @sub_product = SubProduct.all
+  end
+  
 end

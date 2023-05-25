@@ -1,13 +1,9 @@
 <h1 style=color:red>User Details</h1><br>
-<p><strong>FirstName:</strong> <%= @user.first_name%></p>
-<p><strong>LastName:</strong> <%= @user.last_name%></p>
+<p><strong>Name:</strong> <%= @user.first_name%></p>
 <p><strong>Email:</strong> <%= @user.email %></p>
-<p><strong>ContactNo:</strong> <%= @user.contact_no %></p>
-<p><strong>Address:</strong> <%= @user.address%></p>
-<p><strong>Gender:</strong> <%= @user.gender %></p>
 
 <%= link_to "Edit", edit_user_path(@user.id) %><br><br>
 <%= link_to "Destroy", user_path(@user.id),
-    method: :delete,
-    data: {confirm:'Are you sure ?'} %><br><br>
+method: :delete,
+data: {confirm:'Are you sure ?'} %><br><br>
 <%= link_to "Back", products_path %>

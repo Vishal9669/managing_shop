@@ -1,2 +1,26 @@
-<h1 style="color:red"><center>Shop Management Dashboard</center></h1><br><br><br><br>
-<h1 style="color:black"><center>The thing is, I don’t want to be sold to when I walk into a store.<br><br> I want to be welcomed.</center></h1>
+<h1 style="color:red"><center>Shop Management Dashboard</center></h1><br><br>
+
+  <% @products.each do |product| %>
+    <h1 style = color:red> <%= product.name%> </h1>
+    <table class="table table-hover">
+      <tr>
+        <th>Id</th>
+        <th>CompanyName</th>
+        <th>Description</th>
+        <th>MfgDate</th>
+        <th>Price</th>
+      </tr>
+
+      <% @sub_product.each do |sub_product| %>
+        <tr>
+        <% if product.id == sub_product.product_id %>
+          <td><%= sub_product.id %></td>
+          <td><%= sub_product.company_name %></td>
+          <td><%= sub_product.description %></td>
+          <td><%= sub_product.mfg_date %></td>
+          <td><%= sub_product.price %></td> <td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>

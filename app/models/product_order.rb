@@ -4,9 +4,7 @@ class ProductOrder < ApplicationRecord
 
   before_save :update_total_price
 
-
   def update_total_price
     self.total_price = product.price * order.quantity
   end
-
 end

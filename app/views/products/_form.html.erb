@@ -1,5 +1,4 @@
-<h1 style="color:red">Add New Product</h1>
-<br>
+<h1 style="color:red">Add New Product</h1><br>
 
 <%= form_with model: @product, local: true do |form| %>
 
@@ -11,14 +10,11 @@
     <% end %>
   </p>
 
-
   <p>
     <%= form.submit %>
   </p>
 
 <% end %>
 
-<%= link_to 'Back', products_path %>
-<br>
-<br>
+<%= link_to 'Back', products_path %><br><br>
 <%= link_to 'Back to dashboard', root_path %>

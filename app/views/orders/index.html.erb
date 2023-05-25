@@ -1,9 +1,6 @@
 <h1><%= link_to "Add new Order", new_order_path, class: "btn btn-primary" %></h1>
-<h1><%= link_to 'Back to dashboard', root_path %></h1>
-<br>
+<h1><%= link_to 'Back to dashboard', root_path %></h1><br>
 <h1 style="color:red">Orders List</h1>
-
-
 <table class="table table-bordered">
   <tr>
     <th>UserId</th>
@@ -21,11 +18,9 @@
         <% end %>
       </td>
       <td><%= order.quantity %></td>
-
       <% order.product_orders.each do |order| %>
       <td><%= order.total_price %></td>
       <% end %>
-
       <td><%= link_to "Edit", edit_order_path(order.id) %></td>
       <td><%= link_to "Destroy", order_path(order.id),
       method: :delete,

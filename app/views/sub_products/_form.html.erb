@@ -1,25 +1,24 @@
 <%= form_with model: [ @product, @subproduct] do |form| %>
-  <h1 style=color:red>Add Subproduct Details</h1>
+  <h1 style=color:red>Add Subproduct</h1>
   <p>
-  <%= form.label :CompanyName %><br>
-  <%= form.text_field :company_name %>
+    <%= form.label :CompanyName %><br>
+    <%= form.text_field :company_name %>
   </p>
   <p>
-  <%= form.label :Description %><br>
-  <%= form.text_area :description %>
+    <%= form.label :Description %><br>
+    <%= form.text_area :description %>
   </p>
   <p>
-  <%= form.label :MfgDate %><br>
-  <%= form.date_field :mfg_date %>
+    <%= form.label :MfgDate %><br>
+    <%= form.date_field :mfg_date %>
   </p>
   <p>
-  <%= form.label :Price %><br>
-  <%= form.number_field :price %>
+    <%= form.label :Price %><br>
+    <%= form.number_field :price %>
   </p>
   <p>
-  <%= form.submit %>
+    <%= form.submit %>
   </p>
-  <% end %>
+<% end %>
 
-  <p><%#= link_to 'Edit', edit_product_sub_product_path( @product.id, @sub_products.id) %></p>
   <p><%= link_to 'Back to products', products_path(@product.id) %></p>
