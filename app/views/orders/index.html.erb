@@ -5,8 +5,7 @@
   <tr>
     <th>UserId</th>
     <th>Quantity</th>
-    <th>Total</th>
-    <th>Edit</th>
+    <th>Total Price</th>
     <th>Delete<th>
   </tr>
   <% @orders.each do |order| %>
@@ -18,10 +17,11 @@
         <% end %>
       </td>
       <td><%= order.quantity %></td>
+
       <% order.product_orders.each do |order| %>
       <td><%= order.total_price %></td>
       <% end %>
-      <td><%= link_to "Edit", edit_order_path(order.id) %></td>
+
       <td><%= link_to "Destroy", order_path(order.id),
       method: :delete,
       data: {confirm:'Are you sure ?'} %></td>

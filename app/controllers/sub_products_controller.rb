@@ -36,7 +36,6 @@ class SubProductsController < ApplicationController
   end
 
   private
-
   def set_product_id
     @product = Product.find(params[:product_id])
   end
@@ -52,4 +51,5 @@ class SubProductsController < ApplicationController
   def sub_product_params
     params.require(:sub_product).permit(:company_name, :description, :mfg_date, :price, :product_id)
   end
+
 end

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
 
+
   def index
     @products = Product.all
   end
@@ -41,6 +42,12 @@ class ProductsController < ApplicationController
     redirect_to products_url
   end
 
+  def  selected_subproducts
+    product = Product.find(params[:id])
+    subproducts = product.sub_products
+    render json: subproducts
+  end
+
   private
 
   def product_params
@@ -57,4 +64,5 @@ class ProductsController < ApplicationController
     @user = current_user
     @order = Order.new
   end
+
 end

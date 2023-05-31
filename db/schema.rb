@@ -1,4 +1,3 @@
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_22_070228) do
+ActiveRecord::Schema.define(version: 2023_05_31_073735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,11 +41,10 @@ ActiveRecord::Schema.define(version: 2023_05_22_070228) do
     t.integer "quantity"
     t.float "total_price"
     t.bigint "order_id", null: false
-    t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sub_product_id"
     t.index ["order_id"], name: "index_product_orders_on_order_id"
-    t.index ["product_id"], name: "index_product_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -75,6 +73,5 @@ ActiveRecord::Schema.define(version: 2023_05_22_070228) do
 
   add_foreign_key "orders", "users"
   add_foreign_key "product_orders", "orders"
-  add_foreign_key "product_orders", "products"
   add_foreign_key "sub_products", "products"
 end

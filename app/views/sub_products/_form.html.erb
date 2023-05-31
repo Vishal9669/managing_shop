@@ -1,5 +1,4 @@
 <%= form_with model: [ @product, @subproduct] do |form| %>
-  <h1 style=color:red>Add Subproduct</h1>
   <p>
     <%= form.label :CompanyName %><br>
     <%= form.text_field :company_name %>
@@ -21,4 +20,4 @@
   </p>
 <% end %>
 
-  <p><%= link_to 'Back to products', products_path(@product.id) %></p>
+<p><%= link_to 'Back to products', products_path(@product.id) %></p>
