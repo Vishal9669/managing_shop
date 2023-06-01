@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "home#index"
   resources :orders
   resources :users
 
   resources :products do
-    # get 'subproducts', on: :member
     resources :sub_products
   end
 

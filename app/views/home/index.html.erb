@@ -2,7 +2,7 @@
 
   <% @products.each do |product| %>
     <h1 style = color:red> <%= product.name%> </h1>
-    <table class="table table-hover">
+    <table class="table table-bordered">
       <tr>
         <th>Id</th>
         <th>CompanyName</th>
@@ -18,7 +18,7 @@
           <td><%= sub_product.company_name %></td>
           <td><%= sub_product.description %></td>
           <td><%= sub_product.mfg_date %></td>
-          <td><%= sub_product.price %></td> <td>
+          <td><%= sub_product.price %></td>
           <% end %>
         </tr>
       <% end %>
