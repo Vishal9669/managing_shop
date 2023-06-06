@@ -36,6 +36,7 @@ class SubProductsController < ApplicationController
   end
 
   private
+  
   def set_product_id
     @product = Product.find(params[:product_id])
   end

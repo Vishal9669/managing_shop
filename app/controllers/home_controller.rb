@@ -4,5 +4,5 @@ class HomeController < ApplicationController
      @products = Product.all
      @sub_product = SubProduct.all
   end
-  
+
 end

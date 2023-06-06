@@ -1,6 +1,6 @@
 class ProductOrder < ApplicationRecord
-  belongs_to :order
-  belongs_to :sub_product
+  has_many :order
+  has_many :sub_products
 
 
   after_create :update_total_price

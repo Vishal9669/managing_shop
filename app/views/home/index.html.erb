@@ -9,16 +9,18 @@
         <th>Description</th>
         <th>MfgDate</th>
         <th>Price</th>
+        <th>Add to cart</th>
       </tr>
 
       <% @sub_product.each do |sub_product| %>
         <tr>
-        <% if product.id == sub_product.product_id %>
-          <td><%= sub_product.id %></td>
-          <td><%= sub_product.company_name %></td>
-          <td><%= sub_product.description %></td>
-          <td><%= sub_product.mfg_date %></td>
-          <td><%= sub_product.price %></td>
+          <% if product.id == sub_product.product_id %>
+            <td><%= sub_product.id %></td>
+            <td><%= sub_product.company_name %></td>
+            <td><%= sub_product.description %></td>
+            <td><%= sub_product.mfg_date %></td>
+            <td><%= sub_product.price %></td>
+            <td><%= link_to "add", add_to_cart_path(sub_products: sub_product.id), method: :post %></td>
           <% end %>
         </tr>
       <% end %>
