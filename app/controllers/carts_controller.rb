@@ -4,27 +4,15 @@ class CartsController < ApplicationController
     @carts = Cart.all
   end
 
-  def new
-    @cart = Cart.new
-  end
 
-  def show
-    @cart = Cart.find(params[:id])
-  end
-
-  def create
-    @cart = Cart.new(cart_params)
-
-    if @cart.save
+  def add_to_cart
+    @subproduct = SubProduct.find(params[:sub_products])
+    cart = @subproduct.carts.new
+    if cart.save
       redirect_to "/carts"
     else
       render :new
     end
-  end
-
-  def add_to_cart
-    @subproduct = @product.sub_products.find(params[:id])
-    redirect_to "/carts"
   end
 
   def destroy

@@ -14,15 +14,17 @@
     <body>
       <% @carts.each do |cart| %>
         <tr>
-          <td><%= cart.sub_product_id%></td>
-          <td><%= cart.sub_product.company_name%></td>
-          <td><%= cart.sub_product.description%></td>
-          <td><%= cart.sub_product.mfg_date%></td>
-          <td><%= cart.sub_product.price%></td>
-          <td><%= link_to "Remove", cart_path(cart.id),
-          method: :delete,
-          data: {confirm:'Are you sure ?'} %></td>
-          <td><%= link_to "Buy Now", '#' %></td>
+          <% if cart.sub_product_id.present? %>
+            <td><%= cart.sub_product_id%></td>
+            <td><%= cart.sub_product.company_name%></td>
+            <td><%= cart.sub_product.description%></td>
+            <td><%= cart.sub_product.mfg_date%></td>
+            <td><%= cart.sub_product.price%></td>
+            <td><%= link_to "Remove", cart_path(cart.id),
+            method: :delete,
+            data: {confirm:'Are you sure ?'} %></td>
+            <td><%= link_to "Buy Now", '#' %></td>
+          <% end %>
         </tr>
       <% end %>
     </body>

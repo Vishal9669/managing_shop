@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
+
   has_many :orderables
   has_many :products, through: :orderables
-  has_many :carts
-
+  belongs_to :sub_product
 end
