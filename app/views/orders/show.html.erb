@@ -2,14 +2,13 @@
 <p><strong>UserId:</strong> <%= @order.user_id%></p>
 <p><strong>UserName:</strong> <%= @order.user.first_name%></p>
 <p><strong>Email:</strong> <%= @order.user.email%></p>
-<p><strong>ProductName:</strong> <% @order.product_orders.each do |product_order| %>
-  <%= product_order.sub_product.company_name %>
+<p>
+  <strong>ProductName:</strong>
+  <% @order.product_orders.each do |product_order| %>
+    <%= product_order.sub_product.company_name %>
   <% end %>
 </p>
-<p><strong>Quantity:</strong> <%= @order.quantity %></p>
 <p><strong>TotalPrice:</strong> <%= @order.product_orders.sum(:total_price) %></p>
-
-
 <%= link_to "Destroy", order_path(@order.id),
   method: :delete,
   data: {confirm:'Are you sure ?'} %><br><br>

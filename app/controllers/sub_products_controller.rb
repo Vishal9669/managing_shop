@@ -1,4 +1,5 @@
 class SubProductsController < ApplicationController
+  
   before_action :set_product_id , only: [:create, :show, :edit, :update, :destroy]
   before_action :set_sub_product_id, only: [:show, :edit, :update, :destroy]
 
@@ -36,7 +37,7 @@ class SubProductsController < ApplicationController
   end
 
   private
-  
+
   def set_product_id
     @product = Product.find(params[:product_id])
   end

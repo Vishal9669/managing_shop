@@ -4,7 +4,6 @@ class CartsController < ApplicationController
     @carts = Cart.all
   end
 
-
   def add_to_cart
     @subproduct = SubProduct.find(params[:sub_products])
     cart = @subproduct.carts.new
@@ -24,7 +23,7 @@ class CartsController < ApplicationController
   private
 
   def cart_params
-    params.require(:cart).permit(:id, :sub_product_id)
+    params.require(:cart).permit(:id, :quantity, :sub_product_id)
   end
 
 end

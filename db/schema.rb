@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_02_110931) do
+ActiveRecord::Schema.define(version: 2023_06_07_122043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "carts", force: :cascade do |t|
+    t.integer "quantity"
     t.bigint "sub_product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -40,12 +41,11 @@ ActiveRecord::Schema.define(version: 2023_06_02_110931) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "quantity"
-    t.bigint "product_id"
     t.bigint "sub_product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_orders_on_product_id"
+    t.bigint "cart_id"
+    t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["sub_product_id"], name: "index_orders_on_sub_product_id"
   end
 
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2023_06_02_110931) do
   add_foreign_key "carts", "sub_products"
   add_foreign_key "orderables", "carts"
   add_foreign_key "orderables", "products"
-  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "carts"
   add_foreign_key "orders", "sub_products"
   add_foreign_key "product_orders", "orders"
   add_foreign_key "product_orders", "products"

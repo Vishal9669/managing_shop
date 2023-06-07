@@ -9,26 +9,6 @@
     <% end %>
   </p>
 
-  <%= form.fields_for :product_orders do |product_order_form| %>
-    <p>
-      <%= product_order_form.label :ProductName %><br>
-      <%= product_order_form.collection_select(:id, Product.all, :id, :name, { prompt: 'Select a Product' }, prompt: true) %>
-    </p>
-
-    <p>
-      <%= product_order_form.label :SubProductName %><br>
-      <%= product_order_form.collection_select(:sub_product_id, [], :id, :company_name, prompt: 'Select a SubProduct') %>
-    </p>
-  <% end %>
-
-  <p>
-  <%= form.label :Quantity %><br>
-  <%= form.text_field :quantity %>
-  <% @order.errors.full_messages_for(:quantity).each do |message| %>
-    <div style="color:red"><%= message %></div>
-  <% end %>
-  </p>
-
   <p>
     <%= form.submit %>
   </p>

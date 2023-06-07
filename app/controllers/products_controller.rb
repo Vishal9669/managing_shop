@@ -58,7 +58,6 @@ class ProductsController < ApplicationController
     params.require(:sub_product).permit(:company_name, :description, :mfg_date, :price, :product_id)
   end
 
-
   def order_form
     @product = Product.find(params[:id])
     @user = current_user
