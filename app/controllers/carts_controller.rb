@@ -1,29 +1,38 @@
 class CartsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
-    @carts = Cart.all
+    @cart = current_user.cart
+  end
+
+  def show
+    @cart = Cart.find(params[:id])
   end
 
   def add_to_cart
-    @subproduct = SubProduct.find(params[:sub_products])
-    cart = @subproduct.carts.new
-    if cart.save
+
+    if current_user.present? && current_user.cart.present?
+      @cart = current_user.cart
+    else
+      @cart = current_user.build_cart
+      @cart.save
+    end
+
+    @sub_product = SubProduct.find(params[:sub_product])
+    u = @cart
+    @cart_items = CartItem.create(cart_id:u.id,sub_product_id:@sub_product.id)
+    if @cart_items
       redirect_to "/carts"
     else
-      render :new
+      redirect_to sub_product_path(@sub_product)
     end
-  end
-
-  def destroy
-    @cart = Cart.find(params[:id])
-    @cart.destroy
-    redirect_to carts_url
   end
 
   private
 
   def cart_params
-    params.require(:cart).permit(:id, :quantity, :sub_product_id)
+    params.require(:cart).permit(:id, cart_items_attributes: [:cart_id, :sub_product_id, :quantity, :total])
   end
 
 end

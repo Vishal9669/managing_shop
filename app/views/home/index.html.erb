@@ -1,28 +1,23 @@
 <h1 style="color:red"><center>Shop Management Dashboard</center></h1><br><br>
+<% @products.each do |product| %>
+  <h1 style = color:red> <%= product.name%> </h1>
+  <table class="table table-bordered">
+    <tr>
+      <th>CompanyName</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Add to cart</th>
+    </tr>
 
-  <% @products.each do |product| %>
-    <h1 style = color:red> <%= product.name%> </h1>
-    <table class="table table-bordered">
+    <% @sub_product.each do |sub_product| %>
       <tr>
-        <th>Id</th>
-        <th>CompanyName</th>
-        <th>Description</th>
-        <th>MfgDate</th>
-        <th>Price</th>
-        <th>Add to cart</th>
+        <% if product.id == sub_product.product_id %>
+          <td><%= sub_product.company_name %></td>
+          <td><%= sub_product.description %></td>
+          <td><%= sub_product.price %></td>
+          <td><%= link_to "add", add_to_cart_path(sub_product: sub_product.id) %></td>
+        <% end %>
       </tr>
-
-      <% @sub_product.each do |sub_product| %>
-        <tr>
-          <% if product.id == sub_product.product_id %>
-            <td><%= sub_product.id %></td>
-            <td><%= sub_product.company_name %></td>
-            <td><%= sub_product.description %></td>
-            <td><%= sub_product.mfg_date %></td>
-            <td><%= sub_product.price %></td>
-            <td><%= link_to "add", add_to_cart_path(sub_products: sub_product.id), method: :post %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
-  <% end %>
+    <% end %>
+  </table>
+<% end %>

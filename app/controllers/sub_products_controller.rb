@@ -1,5 +1,5 @@
 class SubProductsController < ApplicationController
-  
+
   before_action :set_product_id , only: [:create, :show, :edit, :update, :destroy]
   before_action :set_sub_product_id, only: [:show, :edit, :update, :destroy]
 
@@ -51,7 +51,7 @@ class SubProductsController < ApplicationController
   end
 
   def sub_product_params
-    params.require(:sub_product).permit(:company_name, :description, :mfg_date, :price, :product_id)
+    params.require(:sub_product).permit(:company_name, :description, :price, :product_id)
   end
 
 end

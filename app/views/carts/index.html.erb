@@ -1,39 +1,36 @@
-<h4><%= link_to 'Back to dashboard', root_path %></h4><br>
+<h4><%= link_to 'Back to Products', root_path %></h4><br>
+<h4 style = color:red>Cart Details</h4><br>
 
-<h1 style = color:red>Shopping Cart</h1>
-
-  <table class="table table-bordered">
+<table class="table table-bordered">
+  <tr>
+    <th>CompanyName</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>Remove</th>
+  </tr>
+  <body>
+    <% @cart.cart_items.each do |cart_item| %>
       <tr>
-        <th>Id</th>
-        <th>CompanyName</th>
-        <th>Description</th>
-        <th>MfgDate</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Remove</th>
+        <% if cart_item.sub_product.id.present? %>
+          <td><%= cart_item.sub_product.company_name%></td>
+          <td><%= cart_item.sub_product.description%></td>
+          <td><%= cart_item.sub_product.price%></td>
+        <% end %>
+          <td>
+            <%= form_with model: cart_item, url: cart_item_path(cart_item.id), local: true do |f| %>
+              <%= f.number_field :quantity, value: cart_item.quantity, min: 1 %>
+              <%= f.submit 'Update' %>
+            <% end %>
+          </td>
+        <td><%= cart_item.total %></td>
+        <td>
+        <%= link_to 'Remove', cart_item_path(cart_item.id),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
-    <body>
-      <% @carts.each do |cart| %>
-        <tr>
-          <% if cart.sub_product_id.present? %>
-            <td><%= cart.sub_product_id%></td>
-            <td><%= cart.sub_product.company_name%></td>
-            <td><%= cart.sub_product.description%></td>
-            <td><%= cart.sub_product.mfg_date%></td>
-            <td><%= cart.sub_product.price%></td>
-            <td>
-              <%= form_tag add_to_cart_path, method: :post do %>
-                <%= hidden_field_tag :cart_id, cart.id %>
-                <%= number_field_tag :quantity, cart.quantity, min: 1 %>
-              <% end %>
-            </td>
-            <td><%= link_to "Remove", cart_path(cart.id),
-            method: :delete,
-            data: {confirm:'Are you sure ?'} %></td>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </body>
-  </table>
-<%= button_to "Buy Now", orders_path, method: :post %>
+    <% end %>
+  </body>
+</table>

@@ -1,5 +1,4 @@
 class ProductOrder < ApplicationRecord
-
   has_many :order
   has_many :sub_products
 
@@ -9,5 +8,4 @@ class ProductOrder < ApplicationRecord
     self.total_price = sub_product.price.to_i * cart.quantity
     save
   end
-
 end

@@ -1,7 +1,8 @@
 class Cart < ApplicationRecord
-
   has_many :orderables
   has_many :products, through: :orderables
-  belongs_to :sub_product
-  
+  has_many :cart_items
+  belongs_to :user
+
+  accepts_nested_attributes_for :cart_items
 end
