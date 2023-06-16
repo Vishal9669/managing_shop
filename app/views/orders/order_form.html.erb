@@ -1,4 +1,0 @@
-<%= form_for(@order, url: create_order_path, method: :post) do |f| %>
-  <%= f.hidden_field :user_id, value: @user.id %>
-  <%= f.submit 'Place Order' %>
-<% end %>

@@ -21,9 +21,9 @@ class CartsController < ApplicationController
 
     @sub_product = SubProduct.find(params[:sub_product])
     u = @cart
-    @cart_items = CartItem.create(cart_id:u.id,sub_product_id:@sub_product.id)
+    @cart_items = CartItem.create(cart_id:u.id, sub_product_id:@sub_product.id, quantity:1)
     if @cart_items
-      redirect_to "/carts"
+      redirect_to carts_path
     else
       redirect_to sub_product_path(@sub_product)
     end
