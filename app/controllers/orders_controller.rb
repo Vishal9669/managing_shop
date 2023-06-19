@@ -1,40 +1,34 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = Order.all
+    @cart = current_user.cart
   end
 
-  def new
-    @order = Order.new
-    @order.product_orders.build
-  end
 
   def show
     @order = Order.find(params[:id])
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.save
-      redirect_to "/orders"
-    else
-      render :new, status: :unprocessable_entity
+    @cart = Cart.find(params[:id])
+    @order = Order.create(user: @cart.user, total: @cart.calculate_grand_total, cart: @cart)
+
+    @cart.destroy
+    redirect_to orders_path
+  end
+
+  def generate_pdf
+    @cart = current_user.cart
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: orders_path,
+               template: 'orders/index.html.erb',
+               layout: 'pdf.html'
+      end
     end
   end
 
-
-  def edit
-    @order = Order.find(params[:id])
-  end
-
-  def update
-    @order = Order.find(params[:id])
-    if @order.update(order_params)
-      redirect_to @order
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
 
   def destroy
     @order = Order.find(params[:id])
@@ -45,7 +39,7 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:user_id, :total_price, product_orders_attributes: [:sub_product_id])
+    params.require(:order).permit(:id, :user_id, :total, cart_attributes: [:id, :user_id, :total])
   end
 
 end
