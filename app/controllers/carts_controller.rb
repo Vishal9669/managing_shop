@@ -23,11 +23,12 @@ class CartsController < ApplicationController
     u = @cart
     @cart_items = CartItem.create(cart_id:u.id, sub_product_id:@sub_product.id, quantity:1)
     if @cart_items
-      redirect_to carts_path
+      redirect_to root_path
     else
       redirect_to sub_product_path(@sub_product)
     end
   end
+
 
   def create_order
     @cart = current_user.cart
@@ -35,18 +36,21 @@ class CartsController < ApplicationController
     if @cart.cart_items.blank?
       redirect_to cart_path, alert: "Cart is empty. Please add items before placing an order."
     else
-      if @cart.order.blank?
-        order = Order.create(user: current_user, cart: @cart, total: @cart.calculate_grand_total)
-        redirect_to order_path(order), notice: "Order placed successfully!"
-      else
-        redirect_to order_path(@cart.order), alert: "An order has already been placed for this cart."
-      end
+        order = Order.new(user: current_user, total: @cart.calculate_grand_total)
+        order.save(validate: false)
+        if order.persisted?
+          order = Order.create(user: current_user, total: @cart.calculate_grand_total)
+          @cart.destroy
+          redirect_to orders_path, notice: "Order placed successfully!"
+        else
+          redirect_to carts_path, alert: "Failed to create the order."
+        end
     end
   end
-  
+
   private
 
   def cart_params
-    params.require(:cart).permit(:id, cart_items_attributes: [:cart_id, :sub_product_id, :quantity, :total])
+    params.require(:cart).permit(:id, :grand_total, cart_items_attributes: [:cart_id, :sub_product_id, :quantity, :total])
   end
 end

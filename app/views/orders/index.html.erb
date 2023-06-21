@@ -1,36 +1,27 @@
 <h4><%= link_to 'Back to Dashboard', root_path %></h4><br>
 <h4 style="color:red;">Order-Items Details</h4><br>
 
-<% if @cart.present? && @cart.cart_items.present? %>
-  <table class="table table-bordered">
-    <tr>
-      <th>CompanyName</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total</th>
-    </tr>
-    <tbody>
-      <% @cart.cart_items.each do |cart_item| %>
-        <% if cart_item.sub_product.present? %>
-          <tr>
-            <td><%= cart_item.sub_product.company_name %></td>
-            <td><%= cart_item.sub_product.description %></td>
-            <td><%= cart_item.sub_product.price %></td>
-            <td><%= cart_item.quantity %></td>
-            <td><%= cart_item.total %></td>
-          </tr>
-        <% end %>
+<table class="table table-bordered">
+  <tr>
+    <th>ID</th>
+    <th>Total</th>
+  </tr>
+  <tbody>
+    <% if @order_item.present? %>
+      <% @order_item.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.total %></td>
+        </tr>
       <% end %>
-      <tr>
-        <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
-        <td><%= @cart.calculate_grand_total %></td>
-      </tr>
-    </tbody>
-  </table>
-  <% else %>
-  <p>No cart items available.</p>
-<% end %>
-<%= link_to generate_pdf_order_path(@cart, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
-  Download Bill
+    <% end %>
+  </tbody>
+</table>
+
+<% if @order_item %>
+  <%= link_to generate_pdf_order_path(@order_item, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
+    Download Bill
+  <% end %>
+<% else %>
+  <p>No cart available.</p>
 <% end %>

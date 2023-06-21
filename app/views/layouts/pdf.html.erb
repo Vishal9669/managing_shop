@@ -1,70 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Order-Items Details</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    h1 {
-      color: #333;
-      text-align: center;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-    .grand-total {
-      text-align: right;
-      font-weight: bold;
-    }
-    div {
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <h1>Order-Items Details</h1>
-  <div class="user-info">
-    <p>Name : <%= current_user.first_name %></p>
-  </div>
+  <head>
+    <title>Order-Items Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+      .grand-total {
+        text-align: right;
+        font-weight: bold;
+      }
+      div {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Order-Items Details</h1>
+    <div class="user-info">
+      <p>Name : <%= current_user.first_name %></p>
+    </div>
 
-  <% if @cart.present? && @cart.cart_items.present? %>
-    <table>
+    <table class="table table-bordered">
       <tr>
-        <th>CompanyName</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Quantity</th>
+        <th>ID</th>
         <th>Total</th>
       </tr>
-      <% @cart.cart_items.each do |cart_item| %>
-        <% if cart_item.sub_product.present? %>
-          <tr>
-            <td><%= cart_item.sub_product.company_name %></td>
-            <td><%= cart_item.sub_product.description %></td>
-            <td><%= cart_item.sub_product.price %></td>
-            <td><%= cart_item.quantity %></td>
-            <td><%= cart_item.total %></td>
-          </tr>
+      <% if @order_item.present? %>
+          <% @order_item.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.total %></td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-      <tr>
-        <td colspan="4" class="grand-total">Grand Total:</td>
-        <td><%= @cart.calculate_grand_total %></td>
-      </tr>
     </table>
-  <% else %>
-    <p>No cart items available.</p>
-  <% end %>
-</body>
+  </body>
 </html>

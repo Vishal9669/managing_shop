@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root "home#index"
+    get 'add_to_cart', to: 'carts#add_to_cart', as: 'add_to_cart'
   resources :orders do
     member do
       get 'generate_pdf'
@@ -12,10 +13,8 @@ Rails.application.routes.draw do
   resources :carts do
     post 'create_order', on: :member
   end
-
   resources :products do
     resources :sub_products
   end
 
-  get '/add_to_cart', to: 'carts#add_to_cart', as: 'add_to_cart'
 end

@@ -1,12 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @cart = current_user.cart
-  end
-
-
-  def show
-    @order = Order.find(params[:id])
+    @order_item = current_user.orders
   end
 
   def create
@@ -39,7 +34,7 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:id, :user_id, :total, cart_attributes: [:id, :user_id, :total])
+    params.require(:order).permit(:id, :user_id, :total, cart_attributes: [:id, :user_id, :grand_total])
   end
 
 end
