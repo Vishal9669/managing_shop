@@ -36,10 +36,10 @@ class CartsController < ApplicationController
     if @cart.cart_items.blank?
       redirect_to cart_path, alert: "Cart is empty. Please add items before placing an order."
     else
-        order = Order.new(user: current_user, total: @cart.calculate_grand_total)
+        order = Order.new(user: current_user, grand_total: @cart.grand_total)
         order.save(validate: false)
         if order.persisted?
-          order = Order.create(user: current_user, total: @cart.calculate_grand_total)
+          order = Order.create(user: current_user, grand_total: @cart.grand_total)
           @cart.destroy
           redirect_to orders_path, notice: "Order placed successfully!"
         else

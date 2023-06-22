@@ -1,2 +1,0 @@
-class Orderable < ApplicationRecord
-end
