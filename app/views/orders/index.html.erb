@@ -1,27 +1,38 @@
+
 <h4><%= link_to 'Back to Dashboard', root_path %></h4><br>
 <h4 style="color:red;">Order-Items Details</h4><br>
 
-<table class="table table-bordered">
-  <tr>
-    <th>ID</th>
-    <th>Total</th>
-  </tr>
-  <tbody>
-    <% if @order_item.present? %>
-      <% @order_item.each do |order| %>
+<% @orders.each do |order| %>
+  <h6>Order ID: <%= order.id %></h6>
+    <table class="table table-bordered">
+      <thead>
         <tr>
-          <td><%= order.id %></td>
-          <td><%= order.grand_total %></td>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
         </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-<% if @order_item %>
-  <%= link_to generate_pdf_order_path(@order_item, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
-    Download Bill
-  <% end %>
-<% else %>
-  <p>No cart available.</p>
+      </thead>
+      <tbody>
+        <% order.order_items.each do |item| %>
+          <tr>
+            <td><%= item.sub_product.company_name %></td>
+            <td><%= item.sub_product.description %></td>
+            <td><%= item.sub_product.price %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.total %></td>
+          </tr>
+        <% end %>
+        <tr>
+        <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
+        <td><%= order.grand_total %></td>
+      </tr>
+        <td>
+          <%= link_to generate_pdf_order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
+            Download Bill
+          <% end %>
+        </td>
+      </tbody>
+    </table>
 <% end %>

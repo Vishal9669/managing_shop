@@ -39,7 +39,19 @@ class CartsController < ApplicationController
         order = Order.new(user: current_user, grand_total: @cart.grand_total)
         order.save(validate: false)
         if order.persisted?
-          order = Order.create(user: current_user, grand_total: @cart.grand_total)
+
+         # Save cart_items as order_items
+         @cart.cart_items.each do |cart_item|
+           sub_product = cart_item.sub_product
+           order_item = OrderItem.new(
+           order_id: order.id,
+           sub_product_id: sub_product.id,
+           quantity: cart_item.quantity,
+           total: cart_item.total
+           )
+           order_item.save
+         end
+
           @cart.destroy
           redirect_to orders_path, notice: "Order placed successfully!"
         else

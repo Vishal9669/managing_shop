@@ -37,20 +37,33 @@
     <div class="user-info">
       <p>Name : <%= current_user.first_name %></p>
     </div>
-
-    <table class="table table-bordered">
-      <tr>
-        <th>ID</th>
-        <th>Total</th>
-      </tr>
-      <% if @order_item.present? %>
-          <% @order_item.each do |order| %>
+    <% @orders.each do |order| %>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% order.order_items.each do |item| %>
             <tr>
-              <td><%= order.id %></td>
-              <td><%= order.grand_total %></td>
+              <td><%= item.sub_product.company_name %></td>
+              <td><%= item.sub_product.description %></td>
+              <td><%= item.sub_product.price %></td>
+              <td><%= item.quantity %></td>
+              <td><%= item.total %></td>
             </tr>
           <% end %>
-        <% end %>
-    </table>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
+            <td><%= order.grand_total %></td>
+           </tr>
+        </tbody>
+      </table>
+    <% end %>
   </body>
 </html>

@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @order_item = current_user.orders
+    @orders = current_user.orders.includes(:order_items, :cart)
   end
 
   def create
@@ -13,13 +13,12 @@ class OrdersController < ApplicationController
   end
 
   def generate_pdf
-    @cart = current_user.cart
+    @orders = current_user.orders.includes(:order_items)
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: orders_path,
-               template: 'orders/index.html.erb',
-               layout: 'pdf.html'
+               template: 'layouts/pdf.html.erb'
       end
     end
   end
