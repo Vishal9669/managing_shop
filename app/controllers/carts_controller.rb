@@ -47,8 +47,7 @@ class CartsController < ApplicationController
            order_id: order.id,
            sub_product_id: sub_product.id,
            quantity: cart_item.quantity,
-           total: cart_item.total
-           )
+           total: cart_item.total)
            order_item.save
          end
 

@@ -16,5 +16,4 @@ Rails.application.routes.draw do
   resources :products do
     resources :sub_products
   end
-
 end

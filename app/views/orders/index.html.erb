@@ -3,8 +3,7 @@
 <h4 style="color:red;">Order-Items Details</h4><br>
 
 <% @orders.each do |order| %>
-  <h6>Order ID: <%= order.id %></h6>
-    <table class="table table-bordered">
+  <table class="table table-bordered">
       <thead>
         <tr>
           <th>Name</th>
@@ -25,14 +24,14 @@
           </tr>
         <% end %>
         <tr>
-        <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
-        <td><%= order.grand_total %></td>
-      </tr>
+          <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
+          <td><%= order.grand_total %></td>
+       </tr>
         <td>
           <%= link_to generate_pdf_order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
-            Download Bill
+            Download Invoice
           <% end %>
         </td>
       </tbody>
-    </table>
+  </table>
 <% end %>

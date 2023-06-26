@@ -4,34 +4,24 @@ class OrdersController < ApplicationController
     @orders = current_user.orders.includes(:order_items, :cart)
   end
 
-  def create
-    @cart = Cart.find(params[:id])
-    @order = Order.create(user: @cart.user, total: @cart.calculate_grand_total, cart: @cart)
-
-    @cart.destroy
-    redirect_to orders_path
-  end
-
   def generate_pdf
-    @orders = current_user.orders.includes(:order_items)
+    @order = Order.includes(:order_items).find(params[:id])
+    pdf = render_to_string pdf: "Invoice",
+                           template: 'orders/show.html.erb',
+                           encoding: "UTF-8"
+
+    OrderStatementMailer.send_order_statement(@order, pdf).deliver_now
+
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: orders_path,
-               template: 'layouts/pdf.html.erb'
+        send_data pdf, filename: 'order_statement.pdf', type: 'application/pdf', disposition: 'attachment'
       end
     end
   end
 
-  def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
-    redirect_to orders_url
-  end
-
   private
   def order_params
-    params.require(:order).permit(:id, :user_id, :total, cart_attributes: [:id, :user_id, :grand_total])
+    params.require(:order).permit(:id)
   end
-
 end
