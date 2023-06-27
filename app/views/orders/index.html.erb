@@ -2,7 +2,7 @@
 <h4><%= link_to 'Back to Dashboard', root_path %></h4><br>
 <h4 style="color:red;">Order-Items Details</h4><br>
 
-<% @orders.each do |order| %>
+<% @orders.reverse_each do |order| %>
   <table class="table table-bordered">
       <thead>
         <tr>

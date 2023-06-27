@@ -1,4 +1,10 @@
 <h1 style="color:red"><center>Shop Management Dashboard</center></h1><br><br>
+<% flash.each do |key, value| %>
+  <div class="alert alert-danger alert-sm" style="color: black;">
+    <%= value %>
+  </div>
+<% end %>
+
 <% @products.each do |product| %>
   <h1 style = color:red> <%= product.name%> </h1>
   <table class="table table-bordered">

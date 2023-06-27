@@ -4,6 +4,10 @@ class OrdersController < ApplicationController
     @orders = current_user.orders.includes(:order_items, :cart)
   end
 
+  def show
+    @order = Order.find(params[:id])
+  end
+
   def generate_pdf
     @order = Order.includes(:order_items).find(params[:id])
     pdf = render_to_string pdf: "Invoice",
@@ -20,8 +24,9 @@ class OrdersController < ApplicationController
     end
   end
 
+
   private
   def order_params
-    params.require(:order).permit(:id)
+    params.require(:order).permit(:id, :product_id)
   end
 end

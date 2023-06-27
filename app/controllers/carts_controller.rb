@@ -23,8 +23,10 @@ class CartsController < ApplicationController
     u = @cart
     @cart_items = CartItem.create(cart_id:u.id, sub_product_id:@sub_product.id, quantity:1)
     if @cart_items
+      flash[:success] = "#{@sub_product.company_name} successfully added to cart!"
       redirect_to root_path
     else
+      flash[:error] = "Failed to add product to cart."
       redirect_to sub_product_path(@sub_product)
     end
   end
