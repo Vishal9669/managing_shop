@@ -27,10 +27,9 @@ class CartsController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = "Failed to add product to cart."
-      redirect_to sub_product_path(@sub_product)
+      redirect_to root_path
     end
   end
-
 
   def create_order
     @cart = current_user.cart

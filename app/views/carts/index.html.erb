@@ -12,8 +12,8 @@
       <th>Remove</th>
     </tr>
     <tbody>
-      <% @cart.cart_items.each do |cart_item| %>
-        <% if cart_item.sub_product.present? %>
+    <% @cart.cart_items.order(:created_at).each do |cart_item| %>
+      <% if cart_item.sub_product.present? %>
           <tr>
             <td><%= cart_item.sub_product.company_name %></td>
             <td><%= cart_item.sub_product.description %></td>

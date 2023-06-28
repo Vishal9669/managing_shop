@@ -1,0 +1,46 @@
+<h4><%= link_to 'Back to Orders', orders_path %></h4><br>
+<h4 style="color:red;">Search-Items Details</h4>
+<div>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+</div>
+
+<% if @search_results.any? %>
+  <% @search_results.each do |order| %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% order.order_items.each do |item| %>
+          <tr>
+            <td><%= highlight(item.sub_product.company_name, @search_query) %></td>
+            <td><%= item.sub_product.description %></td>
+            <td><%= item.sub_product.price %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.total %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
+          <td><%= order.grand_total %></td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to generate_pdf_order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
+              Download Invoice
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
+  <p>No orders found.</p>
+<% end %>
