@@ -5,42 +5,31 @@
   <p class="alert"><%= alert %></p>
 </div>
 
-<% if @search_results.any? %>
-  <% @search_results.each do |order| %>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% order.order_items.each do |item| %>
+<% @search_results.each do |order| %>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% order.order_items.each do |item| %>
+        <% sub_product = item.sub_product %>
+        <% if sub_product && sub_product.company_name && sub_product.description &&
+             (sub_product.company_name.downcase.include?(@search_query.downcase) || sub_product.description.downcase.include?(@search_query.downcase)) %>
           <tr>
-            <td><%= highlight(item.sub_product.company_name, @search_query) %></td>
-            <td><%= item.sub_product.description %></td>
-            <td><%= item.sub_product.price %></td>
+            <td><%= sub_product.company_name %></td>
+            <td><%= sub_product.description %></td>
+            <td><%= sub_product.price %></td>
             <td><%= item.quantity %></td>
             <td><%= item.total %></td>
           </tr>
         <% end %>
-        <tr>
-          <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
-          <td><%= order.grand_total %></td>
-        </tr>
-        <tr>
-          <td>
-            <%= link_to generate_pdf_order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
-              Download Invoice
-            <% end %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  <% end %>
-<% else %>
-  <p>No orders found.</p>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
