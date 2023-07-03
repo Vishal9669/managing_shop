@@ -12,23 +12,23 @@
       <th>Remove</th>
     </tr>
     <tbody>
-    <% @cart.cart_items.order(:created_at).each do |cart_item| %>
-      <% if cart_item.sub_product.present? %>
+      <% @cart.cart_items.order(:created_at).each do |cart_item| %>
+        <% if cart_item.sub_product.present? %>
           <tr>
             <td><%= cart_item.sub_product.company_name %></td>
             <td><%= cart_item.sub_product.description %></td>
             <td><%= cart_item.sub_product.price %></td>
             <td>
-            <%= form_with model: cart_item, url: cart_item_path(cart_item.id), local: true do |f| %>
-              <%= f.number_field :quantity, value: cart_item.quantity, min: 1 %>
-              <%= f.submit 'Update' %>
-            <% end %>
-          </td>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item.id), local: true do |f| %>
+                <%= f.number_field :quantity, value: cart_item.quantity, min: 1 %>
+                <%= f.submit 'Update' %>
+              <% end %>
+            </td>
             <td><%= cart_item.total %></td>
             <td>
-            <%= link_to 'Remove', cart_item_path(cart_item.id),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Remove', cart_item_path(cart_item.id),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
         <% end %>
@@ -39,11 +39,7 @@
       </tr>
     </tbody>
   </table>
-  <%= form_with model: @cart, url: create_order_cart_path(@cart), local: true, method: :post do |f| %>
-    <div class="actions">
-      <%= f.submit 'Buy Now' %>
-    </div>
-  <% end %>
-  <% else %>
-  <p>Your cart is empty, add an items to place order.</p>
+  <%= button_to 'Buy Now', create_order_cart_path(@cart), method: :post, class: "button" %>
+<% else %>
+  <p>Your cart is empty, add an item to place an order.</p>
 <% end %>

@@ -1,49 +1,38 @@
-
 <h4><%= link_to 'Back to Dashboard', root_path %></h4>
 <h4 style="color:red;">Order-Items Details</h4><br>
 
-<div style="position: absolute; top: 60px; right: 20px;">
-  <h4>Filter Orders</h4>
-  <%= form_tag search_orders_orders_path, method: :get do %>
-    <%= text_field_tag :search_query, params[:search_query], placeholder: "Search by item name" %>
-    <%= submit_tag "Search" %>
-  <% end %>
-</div>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-</div>
-
-<% @orders.reverse_each do |order| %>
+<% @orders.each do |order| %>
   <table class="table table-bordered">
-      <thead>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% order.order_items.each do |item| %>
         <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
+          <td><%= item.sub_product.company_name %></td>
+          <td><%= item.sub_product.description %></td>
+          <td><%= item.sub_product.price %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.total %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% order.order_items.each do |item| %>
-          <tr>
-            <td><%= item.sub_product.company_name %></td>
-            <td><%= item.sub_product.description %></td>
-            <td><%= item.sub_product.price %></td>
-            <td><%= item.quantity %></td>
-            <td><%= item.total %></td>
-          </tr>
-        <% end %>
-        <tr>
-          <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
-          <td><%= order.grand_total %></td>
-       </tr>
+      <% end %>
+      <tr>
+        <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
+        <td><%= order.grand_total %></td>
+      </tr>
+      <tr>
         <td>
-          <%= link_to generate_pdf_order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
+          <%= link_to order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
             Download Invoice
           <% end %>
         </td>
-      </tbody>
+      </tr>
+    </tbody>
   </table>
 <% end %>

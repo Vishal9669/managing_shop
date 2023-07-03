@@ -1,5 +1,4 @@
 <%= form_with(model: [ @product, @product.sub_products.build ], local: true) do |form| %>
-
   <h1 style="color:red">SubProducts List</h1>
 
   <table class="table table-bordered">
@@ -10,15 +9,18 @@
       <th>Edit</th>
       <th>Delete</th>
     </tr>
+
     <% @product.sub_products.each do |sub_product| %>
       <tr>
-        <td><%= sub_product.company_name%></td>
+        <td><%= sub_product.company_name %></td>
         <td><%= sub_product.description%></td>
         <td><%= sub_product.price%></td>
         <td><%= link_to "Edit", edit_product_sub_product_path(@product.id, sub_product.id) if sub_product.id.present? %></td>
-        <td><%= link_to "Destroy", product_sub_product_path(@product.id, sub_product.id),
-        method: :delete,
-        data: {confirm:'Are you sure ?'}  if sub_product.id.present? %></td>
+        <td>
+          <%= link_to "Destroy", product_sub_product_path(@product.id, sub_product.id),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } if sub_product.id.present? %>
+        </td>
       </tr>
     <% end %>
   </table>

@@ -1,9 +1,4 @@
 <h1 style="color:red"><center>Shop Management Dashboard</center></h1><br><br>
-<% flash.each do |key, value| %>
-  <div class="alert" style="color: red;">
-    <%= value %>
-  </div>
-<% end %>
 
 <% @products.each do |product| %>
   <h1 style = color:red> <%= product.name%> </h1>
@@ -21,7 +16,7 @@
           <td><%= sub_product.company_name %></td>
           <td><%= sub_product.description %></td>
           <td><%= sub_product.price %></td>
-          <td><%= link_to "add", add_to_cart_path(sub_product: sub_product.id) %></td>
+          <td><%= link_to "add", add_to_cart_path(sub_product: sub_product.id), remote: true %></td>
         <% end %>
       </tr>
     <% end %>

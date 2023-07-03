@@ -2,13 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   root "home#index"
-    get 'add_to_cart', to: 'carts#add_to_cart', as: 'add_to_cart'
+  get 'add_to_cart', to: 'carts#add_to_cart', as: 'add_to_cart'
   resources :orders do
-    collection do
-      get 'search', to: 'orders#search', as: 'search_orders'
-    end
     member do
-      get 'generate_pdf'
+      get 'download_invoice', to: 'orders#download_invoice'
     end
   end
   resources :users

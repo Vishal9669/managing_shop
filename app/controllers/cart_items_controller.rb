@@ -1,12 +1,10 @@
 class CartItemsController < ApplicationController
-
-  before_action :set_cart_item, only: [:destroy, :update]
+  before_action :set_cart_item
 
   def destroy
     @cart_item.destroy
     redirect_to carts_path
   end
-
 
   def update
     if @cart_item.update(cart_item_params)

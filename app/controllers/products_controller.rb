@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_product_id, only: [:show, :edit, :update, :destroy]
 
   def index
     @products = Product.all
@@ -9,45 +10,39 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
     @subproduct = @product.sub_products.build
   end
 
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to "/products"
+      redirect_to products_path
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to @product
+      redirect_to products_path
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
-    redirect_to products_url
-  end
-
-  def  selected_subproducts
-    product = Product.find(params[:id])
-    subproducts = product.sub_products
-    render json: subproducts
+    redirect_to products_path
   end
 
   private
+  def set_product_id
+    @product = Product.find(params[:id])
+  end
+
 
   def product_params
     params.require(:product).permit(:id, :name)
@@ -56,11 +51,4 @@ class ProductsController < ApplicationController
   def sub_product_params
     params.require(:sub_product).permit(:company_name, :description, :mfg_date, :price, :product_id)
   end
-
-  def order_form
-    @product = Product.find(params[:id])
-    @user = current_user
-    @order = Order.new
-  end
-
 end

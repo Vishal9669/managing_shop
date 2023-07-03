@@ -5,5 +5,4 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :cart
-
 end

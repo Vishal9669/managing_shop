@@ -1,0 +1,5 @@
+<% if @cart_item.persisted? %>
+  alert("<%= j @sub_product.company_name %> successfully added to cart!");
+<% else %>
+  alert("Failed to add product to cart.");
+<% end %>
