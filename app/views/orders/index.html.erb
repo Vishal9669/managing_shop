@@ -1,38 +1,42 @@
 <h4><%= link_to 'Back to Dashboard', root_path %></h4>
 <h4 style="color:red;">Order-Items Details</h4><br>
 
-<% @orders.each do |order| %>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% order.order_items.each do |item| %>
+<% if @orders.present? %>
+  <% @orders.each do |order| %>
+    <table class="table table-bordered">
+      <thead>
         <tr>
-          <td><%= item.sub_product.company_name %></td>
-          <td><%= item.sub_product.description %></td>
-          <td><%= item.sub_product.price %></td>
-          <td><%= item.quantity %></td>
-          <td><%= item.total %></td>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
         </tr>
-      <% end %>
-      <tr>
-        <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
-        <td><%= order.grand_total %></td>
-      </tr>
-      <tr>
-        <td>
-          <%= link_to order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
-            Download Invoice
-          <% end %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% order.order_items.each do |item| %>
+          <tr>
+            <td><%= item.sub_product.company_name %></td>
+            <td><%= item.sub_product.description %></td>
+            <td><%= item.sub_product.price %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.total %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
+          <td><%= order.grand_total %></td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to order_path(order, format: :pdf), class: 'btn btn-primary', target: '_blank' do %>
+              Download Invoice
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
+  <p>You have no orders. Place an order.</p>
 <% end %>

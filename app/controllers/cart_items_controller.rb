@@ -7,11 +7,8 @@ class CartItemsController < ApplicationController
   end
 
   def update
-    if @cart_item.update(cart_item_params)
-      redirect_to carts_path
-    else
-      render json: { success: false }
-    end
+    @cart_item.update(cart_item_params)
+    redirect_to carts_path
   end
 
   private

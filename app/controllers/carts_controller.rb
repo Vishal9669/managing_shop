@@ -17,17 +17,15 @@ class CartsController < ApplicationController
     end
 
     @sub_product = SubProduct.find(params[:sub_product])
-    cart = @cart
-    @cart_item = CartItem.create(cart_id: cart.id, sub_product_id: @sub_product.id, quantity: 1)
+    @cart_item = CartItem.create(cart_id: @cart.id, sub_product_id: @sub_product.id, quantity: 1)
 
     respond_to do |format|
-      if @cart_item.persisted?
-        format.html { redirect_to root_path, success: "#{@sub_product.company_name} successfully added to cart!" }
-        format.js
+      if @cart_item.save
+        flash[:notice] = "#{@sub_product.company_name} successfully added to cart!"
       else
-        format.html { redirect_to root_path, error: "Product already exists to cart." }
-        format.js { render js: "alert('Product already exists to cart.');" }
+        flash[:notice] = "Product already exists in cart."
       end
+      format.js { render js: "window.location.href = '#{root_path}';" }
     end
   end
 
@@ -37,9 +35,8 @@ class CartsController < ApplicationController
     if @cart.cart_items.blank?
       redirect_to cart_path, alert: "Cart is empty. Please add items before placing an order."
     else
-      order = Order.new(user: current_user, grand_total: @cart.grand_total)
-      order.save(validate: false)
-      if order.persisted?
+      order = Order.new(user: current_user, grand_total: @cart.grand_total, cart_id: @cart.id)
+      if order.save
         # Save cart_items as order_items
         @cart.cart_items.each do |cart_item|
           sub_product = cart_item.sub_product
