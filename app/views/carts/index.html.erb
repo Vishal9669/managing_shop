@@ -39,7 +39,9 @@
       </tr>
     </tbody>
   </table>
+
   <%= button_to 'Buy Now', create_order_cart_path(@cart), method: :post, class: "button" %>
+
 <% else %>
   <p>Your cart is empty, add an item to place an order.</p>
 <% end %>
