@@ -23,7 +23,7 @@ class CartsController < ApplicationController
       if @cart_item.save
         flash[:notice] = "#{@sub_product.company_name} successfully added to cart!"
       else
-        flash[:notice] = "Product already exists in cart."
+        flash[:notice] = "#{@sub_product.company_name} already exists in cart."
       end
       format.js { render js: "window.location.href = '#{root_path}';" }
     end
