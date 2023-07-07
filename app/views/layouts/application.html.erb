@@ -11,40 +11,31 @@
 
   <body>
     <div class="container">
+      <div style="display:flex;"><hr>
+        <% if user_signed_in? %>
+          <% menu_links = [
+            { name: "Home", path: root_path },
+            { name: "Products", path: "/products" },
+            { name: "Cart", path: "/carts" },
+            { name: "Orders", path: "/orders" }
+          ] %>
 
-      <div style="display:flex;">
-        <hr>
-        <div style="margin-right:25px;">
-          <% if user_signed_in? %>
-            <%= link_to "Home", root_path %>
+          <% menu_links.each do |link| %>
+            <div style="margin-right:25px;">
+              <%= link_to link[:name], link[:path] %>
+            </div>
           <% end %>
-        </div>
 
-        <div style="margin-right:25px;">
-          <% if user_signed_in? %>
-            <%= link_to "Products", "/products" %>
-          <% end %>
-        </div>
-
-        <div style="margin-right:25px;">
-          <% if user_signed_in? %>
-            <%= link_to "Cart", "/carts" %>
-          <% end %>
-        </div>
-
-        <div style="margin-right:25px;">
-          <% if user_signed_in? %>
-            <%= link_to "Orders", "/orders" %>
-          <% end %>
-        </div>
-
-        <div style="margin-right:25px;">
-          <% if user_signed_in? %>
+          <div style="margin-right:25px;">
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to "Sign In", new_user_session_path %>
-          <% end %>
-        </div>
+          </div>
+        <% else %>
+          <div style="margin-top: 20px;">
+            <p style="font-size: 18px;">
+              <strong style="color:red;">Welcome to our Shop!</strong> Please <%= link_to "Sign In", new_user_session_path %> or <%= link_to "Sign Up", new_user_registration_path %> to explore, add this product to your cart and purchase products.
+            </p>
+          </div>
+        <% end %>
 
         <div style="position: absolute; top: 5; right: 0; color:red;">
           <% if user_signed_in? && current_user.present? %>
@@ -53,7 +44,6 @@
         </div>
       </div>
       <hr>
-
       <% flash.each do |key, value| %>
         <div class="alert" style="color: red;">
           <%= value %>
