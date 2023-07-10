@@ -1,12 +1,9 @@
 class SubProductsController < ApplicationController
-  before_action :set_product_id, only: [:create, :show, :edit, :update, :destroy]
-  before_action :set_sub_product_id, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:create, :show, :edit, :update, :destroy]
+  before_action :set_sub_product, only: [:edit, :update, :destroy]
 
   def index
     @subproducts = SubProduct.all
-  end
-
-  def show
   end
 
   def new
@@ -15,6 +12,7 @@ class SubProductsController < ApplicationController
 
   def create
     @subproduct = @product.sub_products.create(sub_product_params)
+    flash[:success] = "#{@subproduct.company_name} successfully created!"
     redirect_to product_path(@product)
   end
 
@@ -24,6 +22,7 @@ class SubProductsController < ApplicationController
 
   def update
     if @subproduct.update(sub_product_params)
+      flash[:success] = "#{@subproduct.company_name} successfully updated!"
       redirect_to product_path(@product)
     else
       render :edit, status: :unprocessable_entity
@@ -32,15 +31,16 @@ class SubProductsController < ApplicationController
 
   def destroy
     @subproduct.destroy
+    flash[:success] = "#{@subproduct.company_name} successfully deleted!"
     redirect_to product_path(@product)
   end
 
   private
-  def set_product_id
+  def set_product
     @product = Product.find(params[:product_id])
   end
 
-  def set_sub_product_id
+  def set_sub_product
     @subproduct = SubProduct.find(params[:id])
   end
 

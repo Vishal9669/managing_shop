@@ -1,12 +1,6 @@
 class CartsController < ApplicationController
-  before_action :authenticate_user!
-
   def index
     @cart = current_user.cart
-  end
-
-  def show
-    @cart = Cart.find(params[:id])
   end
 
   def add_to_cart
@@ -19,13 +13,10 @@ class CartsController < ApplicationController
     @sub_product = SubProduct.find(params[:sub_product])
     @cart_item = CartItem.create(cart_id: @cart.id, sub_product_id: @sub_product.id, quantity: 1)
 
-    respond_to do |format|
-      if @cart_item.save
-        flash[:notice] = "#{@sub_product.company_name} successfully added to cart!"
-      else
-        flash[:notice] = "#{@sub_product.company_name} already exists in cart."
-      end
-      format.js { render js: "window.location.href = '#{root_path}';" }
+    if @cart_item.save
+      flash.now[:success] = "#{@sub_product.company_name} successfully added to cart!"
+    else
+      flash.now[:error] = "#{@sub_product.company_name} already exists in cart."
     end
   end
 

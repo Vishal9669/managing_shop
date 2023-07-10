@@ -1,0 +1,6 @@
+var flashContainer = document.getElementById('flash-messages');
+flashContainer.innerHTML = "<%= j render(partial: 'shared/flash_messages', locals: { flash: flash }) %>";
+
+setTimeout(function() {
+  flashContainer.innerHTML = '';
+}, 5000);

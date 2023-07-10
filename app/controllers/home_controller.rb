@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
+
   def index
-     @products = Product.all
-     @sub_product = SubProduct.all
+    @products = Product.all
+    @sub_product = SubProduct.all
   end
 end

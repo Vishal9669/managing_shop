@@ -68,3 +68,4 @@ gem 'wkhtmltopdf-binary'
 
 
 gem 'rubocop', '~> 1.53', require: false
+gem 'pagy'

@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
+  include Pagy::Backend
 
   def index
-    @orders = current_user.orders.includes(:order_items, :cart).order("created_at DESC")
+    @pagy, @orders = pagy(current_user.orders.includes(:order_items, :cart).order("created_at DESC"), items: 2)
   end
 
   def show

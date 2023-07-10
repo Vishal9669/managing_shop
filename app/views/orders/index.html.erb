@@ -1,4 +1,3 @@
-<h4><%= link_to 'Back to Dashboard', root_path %></h4>
 <h4 style="color:red;">Order-Items Details</h4><br>
 
 <% if @orders.present? %>
@@ -37,6 +36,7 @@
       </tbody>
     </table>
   <% end %>
+  <%== pagy_nav(@pagy) %>
 <% else %>
   <p>You have no orders. Place an order.</p>
 <% end %>
