@@ -11,8 +11,13 @@ class SubProductsController < ApplicationController
   end
 
   def create
-    @subproduct = @product.sub_products.create(sub_product_params)
-    flash[:success] = "#{@subproduct.company_name} successfully created!"
+    @subproduct = @product.sub_products.new(sub_product_params)
+
+    if @subproduct.save
+      flash[:success] = "#{@subproduct.company_name} successfully created!"
+    else
+      flash[:success] = "#{@subproduct.company_name} is already created!"
+    end
     redirect_to product_path(@product)
   end
 

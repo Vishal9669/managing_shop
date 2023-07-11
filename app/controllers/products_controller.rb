@@ -17,10 +17,10 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       flash[:success] = "#{@product.name} successfully created!"
-      redirect_to products_path
     else
-      render :edit, status: :unprocessable_entity
+      flash[:success] = "#{@product.name} already created!"
     end
+    redirect_to products_path
   end
 
   def edit

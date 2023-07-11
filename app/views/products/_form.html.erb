@@ -2,11 +2,7 @@
   <p>
     <%= form.label :product_name, "Product Name" %><br>
     <%= form.text_field :name %>
-    <% @product.errors.full_messages_for(:name).each do |message| %>
-      <div style="color:red"><%= message %></div>
-    <% end %>
   </p>
-
   <p>
     <%= form.submit %>
   </p>
