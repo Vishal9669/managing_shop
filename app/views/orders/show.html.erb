@@ -48,12 +48,16 @@
       }
     </style>
   </head>
+
   <body>
     <h1>Order-Items Details</h1>
+
     <div class="user-info">
       <p>Name: <%= current_user.first_name %></p>
     </div>
+
     <table class="table table-bordered">
+
       <thead>
         <tr>
           <th>Name</th>
@@ -63,6 +67,7 @@
           <th>Total</th>
         </tr>
       </thead>
+
       <tbody>
         <% @order.order_items.each do |item| %>
           <tr>
@@ -73,10 +78,12 @@
             <td><%= item.total %></td>
           </tr>
         <% end %>
+
         <tr>
           <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
           <td class="grand-total"><%= @order.grand_total %></td>
         </tr>
+        
       </tbody>
     </table>
   </body>

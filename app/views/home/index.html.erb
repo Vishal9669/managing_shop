@@ -1,4 +1,6 @@
-<h1 style="color:red"><center>Shop Management Dashboard</center></h1><br>
+<% if user_signed_in? %>
+  <h1 style="color:red"><center>Shop Management Dashboard</center></h1><br>
+<% end %>
 
 <table class="table table-bordered">
   <tr>
@@ -6,7 +8,9 @@
     <th>Company Name</th>
     <th>Description</th>
     <th>Price</th>
-    <th>Add to Cart</th>
+    <% if user_signed_in? %>
+      <th>Add to Cart</th>
+    <% end %>
   </tr>
 
   <% @sub_product.group_by { |sub_product| sub_product.product }.each do |product, sub_products| %>
@@ -18,7 +22,9 @@
         <td><%= sub_product.company_name %></td>
         <td><%= sub_product.description %></td>
         <td><%= sub_product.price %></td>
-        <td><%= link_to "add", add_to_cart_path(sub_product: sub_product.id), remote: true %></td>
+        <% if user_signed_in? %>
+          <td><%= link_to "add", add_to_cart_path(sub_product: sub_product.id), remote: true %></td>
+        <% end %>
       </tr>
     <% end %>
   <% end %>

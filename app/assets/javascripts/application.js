@@ -16,3 +16,12 @@
 //= require jquery3
 //= require jquery_ujs
 //= require_tree .
+
+document.addEventListener('turbolinks:load', function() {
+  var flashMessages = document.querySelectorAll('.flash-message');
+  flashMessages.forEach(function(flashmessage) {
+    setTimeout(function() {
+      flashmessage.remove();
+    }, 5000);
+  });
+});

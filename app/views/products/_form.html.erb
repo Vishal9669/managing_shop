@@ -2,15 +2,10 @@
   <p>
     <%= form.label :product_name, "Product Name" %><br>
     <%= form.text_field :name %>
-    <% @product.errors.full_messages_for(:name).each do |message| %>
-      <div style="color:red"><%= message %></div>
-    <% end %>
   </p>
-
   <p>
     <%= form.submit %>
   </p>
 <% end %>
 
-<%= link_to 'Back', products_path %><br><br>
-<%= link_to 'Back to dashboard', root_path %>
+<%= link_to 'Back', products_path %>

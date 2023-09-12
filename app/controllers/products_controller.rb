@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product_id, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
     @products = Product.all
@@ -16,10 +16,11 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path
+      flash[:success] = "#{@product.name} successfully created!"
     else
-      render :edit, status: :unprocessable_entity
+      flash[:success] = "#{@product.name} already created!"
     end
+    redirect_to products_path
   end
 
   def edit
@@ -27,6 +28,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
+      flash[:success] = "#{@product.name} successfully updated!"
       redirect_to products_path
     else
       render :edit, status: :unprocessable_entity
@@ -35,14 +37,14 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
+    flash[:success] = "#{@product.name} successfully deleted!"
     redirect_to products_path
   end
 
   private
-  def set_product_id
+  def set_product
     @product = Product.find(params[:id])
   end
-
 
   def product_params
     params.require(:product).permit(:id, :name)
